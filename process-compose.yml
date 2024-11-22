@@ -1,0 +1,18 @@
+version: "0.5"
+
+processes:
+  postgresql_app:
+    command: "PGHOST=$PGDATA_APP PGPORT=$PGPORT_APP PGDATA=$PGDATA_APP pg_ctl start -o \"-k /tmp\""
+    is_daemon: true
+    shutdown: 
+      command: "PGDATA=$PGDATA_APP pg_ctl stop -m fast"
+    availability:
+      restart: "always"
+
+  postgresql_oban:
+    command: "PGHOST=$PGDATA_OBAN PGPORT=$PGPORT_OBAN PGDATA=$PGDATA_OBAN pg_ctl start -o \"-k /tmp\""
+    is_daemon: true
+    shutdown: 
+      command: "PGDATA=$PGDATA_OBAN pg_ctl stop -m fast"
+    availability:
+      restart: "always"

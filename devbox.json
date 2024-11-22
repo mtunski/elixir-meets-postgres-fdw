@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.6/.schema/devbox.schema.json",
+  "packages": [
+    "elixir@latest",
+    "postgresql@latest"
+  ],
+  "env": {
+    "HEX_HOME": "$PWD/.devbox/virtenv/hex",
+    "MIX_HOME": "$PWD/.devbox/virtenv/mix",
+    "ERL_AFLAGS": "-kernel shell_history enabled shell_history_path '\"$PWD/.devbox/virtenv/erlang_history\"'",
+    "PGHOST": "localhost",
+    "PGHOST_APP": "$PWD/.devbox/virtenv/postgresql_app",
+    "PGHOST_OBAN": "$PWD/.devbox/virtenv/postgresql_oban",
+    "PGDATA_APP": "$PWD/.devbox/virtenv/postgresql_app/data",
+    "PGDATA_OBAN": "$PWD/.devbox/virtenv/postgresql_oban/data",
+    "PGPORT_APP": "5433",
+    "PGPORT_OBAN": "5434"
+  },
+  "shell": {
+    "init_hook": [
+      "unset PGDATA",
+      "mkdir -m 755 -p $PGHOST_APP",
+      "mkdir -m 755 -p $PGHOST_OBAN",
+      "mkdir -m 755 -p $PGDATA_APP",
+      "mkdir -m 755 -p $PGDATA_OBAN"
+    ],
+    "scripts": {
+      "initdb": [
+        "initdb -D $PGDATA_APP",
+        "createdb -p $PGPORT_APP $USER",
+        "initdb -D $PGDATA_OBAN",
+        "createdb -p $PGPORT_OBAN $USER"
+      ]
+    }
+  }
+}
