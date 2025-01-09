@@ -4,6 +4,7 @@
 - `cd code/elixir-meets-postgres-fdw`
 - `devbox run initdb`
 - `devbox services up postgresql_app postgresql_oban`
+- `devbox run createdb`
 
 <!-- -->
 

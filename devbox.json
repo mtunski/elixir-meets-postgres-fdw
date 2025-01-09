@@ -27,8 +27,10 @@
     "scripts": {
       "initdb": [
         "initdb -D $PGDATA_APP",
+        "initdb -D $PGDATA_OBAN"
+      ],
+      "createdb": [
         "createdb -p $PGPORT_APP $USER",
-        "initdb -D $PGDATA_OBAN",
         "createdb -p $PGPORT_OBAN $USER"
       ]
     }
